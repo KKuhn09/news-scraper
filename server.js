@@ -9,7 +9,7 @@ var Comment = require("./models/Comment.js");
 //set mongoose to leverage built in JS ES6 promises
 mongoose.Promise = Promise;
 //Sets up our port
-var port = process.env.port || 3001;
+var port = process.env.PORT || 3001;
 //initialize express
 var app = express();
 //use morgan and body parser
