@@ -21,8 +21,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 var db = mongoose.connection;
-//db config with mongoose
-mongoose.connect("mongodb://localhost/news-scraper");
+//db config with mongoose1
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/news-scraper");
 
 //show any mongoose errors
 db.on("error", function(error) {
