@@ -4,11 +4,8 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 //models
-
-//scraping tools
-var request = require("request");
-var cheerio = require("cheerio");
-
+var Article = require("./models/Article.js");
+var Comment = require("./models/Comment.js");
 //set mongoose to leverage built in JS ES6 promises
 mongoose.Promise = Promise;
 //initialize express
@@ -40,3 +37,9 @@ require("./app/routes.js")(app);
 app.listen(3001, function(){
 	console.log("App running on port 3001!");
 });
+
+/* Things to do:
+	-Make the homepage scrape articles
+	-Scrape summaries from bleepingcomputer
+	-If articles being scrape have already been scraped, do not store them in the database.
+*/
