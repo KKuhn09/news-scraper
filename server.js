@@ -20,19 +20,9 @@ app.use(bodyParser.urlencoded({
 //make public a static directory
 app.use(express.static("public"));
 
-//If deployed we use the deployed db, otherwise use the local db
-var db = process.env.MONGODB_URI || "mongodb://localhost/news-scraper";
-// Connect mongoose to our database
-mongoose.connect(db, function(error) {
-  // Log any errors connecting with mongoose
-  if (error) {
-    console.log(error);
-  }
-  // Or log a success message
-  else {
-    console.log("mongoose connection is successful");
-  }
-});
+var db = mongoose.connection;
+//db config with mongoose
+mongoose.connect("mongodb://localhost/news-scraper");
 
 //show any mongoose errors
 db.on("error", function(error) {
