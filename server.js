@@ -37,7 +37,7 @@ require("./app/routes.js")(app);
 
 //listen on port 3001
 app.listen(port, function(){
-	console.log("App running on port 3001!");
+	console.log("App running on port " + port + "!");
 });
 
 /* Things to do:
