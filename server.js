@@ -8,6 +8,8 @@ var Article = require("./models/Article.js");
 var Comment = require("./models/Comment.js");
 //set mongoose to leverage built in JS ES6 promises
 mongoose.Promise = Promise;
+//Sets up our port
+var port = process.env.port || 3001;
 //initialize express
 var app = express();
 //use morgan and body parser
@@ -34,7 +36,7 @@ db.once("open", function() {
 require("./app/routes.js")(app);
 
 //listen on port 3001
-app.listen(3001, function(){
+app.listen(port, function(){
 	console.log("App running on port 3001!");
 });
 
