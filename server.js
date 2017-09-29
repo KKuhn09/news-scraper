@@ -2,6 +2,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
+var methodOverride = require("method-override");
 var mongoose = require("mongoose");
 //models
 var Article = require("./models/Article.js");
@@ -17,6 +18,8 @@ app.use(bodyParser.urlencoded({
 }));
 //make public a static directory
 app.use(express.static("public"));
+
+app.use(methodOverride("_method"));
 
 //db config with mongoose
 mongoose.connect("mongodb://localhost/news-scraper");
