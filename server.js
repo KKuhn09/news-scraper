@@ -42,7 +42,5 @@ app.listen(port, function(){
 });
 
 /* Things to do:
-	-Make the homepage scrape articles
-	-Scrape summaries from bleepingcomputer
 	-If articles being scrape have already been scraped, do not store them in the database.
 */

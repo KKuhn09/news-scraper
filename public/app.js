@@ -1,17 +1,14 @@
-//grab the articles as a json
+//Grab the articles as a json
 $.getJSON("/articles", function(data){
 	console.log(data);
 	for(var i=0;i<data.length;i++){
-		$("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].summary + "</p>");
+		$("#articles").append("<p data-id='" + data[i]._id + "'>Title: " + data[i].title + "<br />Link: " + data[i].link + "<br />Summary: " + data[i].summary + "</p>");
 	}
 });
-//when someone clicks a p tag
+//when a p tag is clicked
 $(document).on("click", "p", function(){
-	//empties comments from comment section
-	$("#comments").empty();
-	//save id from the p tag
-	var thisId = $(this).attr("data-id");
-
+	$("#comments").empty();//remove any comment already displayed
+	var thisId = $(this).attr("data-id");//save p's data-id
 	//make ajax call for the article
 	$.ajax({
 		method: "GET",

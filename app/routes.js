@@ -9,17 +9,41 @@ module.exports = function(app){
 
 	app.get("/scrape", function(req, res){
 		//grab body of html with request
-		request("https://www.bleepingcomputer.com/", function(error, response, html){
-			//load body into cheerio and store it in $
-			var $ = cheerio.load(html);
+		request("https://www.npr.org/sections/news/", function(error, response, html){
+			//Check for errors
+			if(!error && response.statusCode === 200){
+				var $ = cheerio.load(html); //load body into cheerio and store it in $
+				//For each article
+				$("p.teaser").each(function(i, element){
+					var h2 = $(this).prev();
+					var title = h2.text(); //grab title
+					var summary = $(this).text();//grab summary
+					var link = h2.children().attr("href");//grab link
+					//Store results into object for model
+					var result = {
+						title: title,
+						summary: summary,
+						link: link
+					}
+					var entry = new Article(result);//Pass result into model
+					entry.save(function(err,doc){
+						if (err){ 
+							console.log(err);//log any errors
+						} else{
+							console.log(doc);
+						}
+					});
+				});
+			}
+			
 			//grab every
-			$("li h4").each(function(i, element){
-
+			// $("div[id='overflow'] article").each(function(i, element){
+			// 	console.log($(this).children("h2").text());
+			// });
+			/*$("li h4").each(function(i, element){
 				var result = {};
-
 				result.title = $(this).children("a").text();
 				result.link = $(this).children("a").attr("href");
-					// result.summary = $(this).find("p").text();
 				//uses article model to create a new entry
 				var entry = new Article(result);
 				//save entry to the db
@@ -30,10 +54,11 @@ module.exports = function(app){
 					}
 					//or log the doc
 					else{
-						console.log(doc);
+						// console.log(doc);
 					}
 				});
-			});
+			});*/
+
 		});
 		res.send("Scrape complete. Reload the homepage to view articles.");
 	});

@@ -1,6 +1,6 @@
 //require mongoose
 var mongoose = require("mongoose");
-//create Schema class
+//store Schema class
 var Schema = mongoose.Schema;
 //create article schema
 var ArticleSchema = new Schema({
@@ -10,10 +10,10 @@ var ArticleSchema = new Schema({
 		required: true
 	},
 	//summary is a required string
-	// summary:{
-	// 	type: String,
-	// 	required: true
-	// },
+	summary:{
+		type: String,
+		required: true
+	},
 	//link is a required string
 	link:{
 		type: String,
